@@ -130,7 +130,7 @@ export function Apps() {
       const user = auth.currentUser;
       if (user) {
         try {
-          const response = await fetch(`http://34.68.23.90:3001/api/personas/${user.uid}/${user.email}`);
+          const response = await fetch(`http://${process.env.VM_IP}:3001/api/personas/${user.uid}/${user.email}`);
           console.log('Response:', response);
           const data = await response.json();
           console.log('Data:', data);

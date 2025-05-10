@@ -52,7 +52,7 @@ export function MessageHeader() {
   const checkUserProfile = async () => {
     if (currentUser) {
       try {
-        const response = await fetch(`http://34.68.23.90:3001/api/profiles/check/${currentUser.uid}`);
+        const response = await fetch(`http://${process.env.VM_IP}:3001/api/profiles/check/${currentUser.uid}`);
         const data = await response.json();
         setHasProfile(data.exists);
       } catch (error) {
@@ -107,7 +107,7 @@ export function MessageHeader() {
 
     const handleInsert = async () => {
       try {
-        const response = await fetch("http://34.68.23.90:3001/api/insert", {
+        const response = await fetch(`http://${process.env.VM_IP}:3001/api/insert`, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json" 
@@ -229,7 +229,20 @@ export function EditorMessage() {
 
 export function MessageItem(props) {
   const { content, sentTime, role, suggestions } = props;
-  const { removeMessage, setMessage } = useGlobal();
+  const { removeMessage, setMessage, typeingMessage, clearTypeing } = useGlobal();
+
+  const handleSuggestionClick = (suggestion) => {
+    // Format the suggestion text before displaying it as a button
+    const displayText = suggestion
+      .replace(/\n/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    // When clicked, set this formatted text as the new message
+    clearTypeing();
+    setMessage(displayText);
+  };
+
   return (
     <div className={classnames(styles.item, styles[role])}>
       {role === "user" ? (
@@ -272,20 +285,25 @@ export function MessageItem(props) {
             </div>
           </div>
           <MessageRender>{content}</MessageRender>
-          {role === 'assistant' && suggestions && suggestions.length > 0 && (
+          {suggestions && suggestions.length > 0 && (
             <div className={styles.suggestions}>
-              {suggestions.map((suggestion, index) => (
-                <Button
-                  key={index}
-                  type="text"
-                  className={styles.suggestion_button}
-                  onClick={() => {
-                    setMessage(suggestion);
-                  }}
-                >
-                  {suggestion}
-                </Button>
-              ))}
+              {suggestions.map((suggestion, index) => {
+                // Format the suggestion text for display
+                const displayText = suggestion
+                  .replace(/\n/g, ' ')
+                  .replace(/\s+/g, ' ')
+                  .trim();
+                
+                return (
+                  <button
+                    key={index}
+                    className={styles.suggestion_button}
+                    onClick={() => handleSuggestionClick(displayText)}
+                  >
+                    {displayText}
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>
@@ -407,7 +425,7 @@ export function MessageBar() {
               // Now store both messages in MongoDB
               try {
                 // Store user message
-                const userResponse = await fetch("http://34.68.23.90:3001/api/chats/store", {
+                const userResponse = await fetch(`http://${process.env.VM_IP}:3001/api/chats/store`, {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json"
@@ -426,7 +444,7 @@ export function MessageBar() {
                 console.log('User message stored successfully');
 
                 // Store complete assistant message
-                const assistantResponse = await fetch("http://34.68.23.90:3001/api/chats/store", {
+                  const assistantResponse = await fetch(`http://${process.env.VM_IP}:3001/api/chats/store`, {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json"

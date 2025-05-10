@@ -29,7 +29,7 @@ export function AuthModal({ visible, onClose, onSignUpSuccess }) {
         authProvider: user.providerData[0]?.providerId || 'email'
       };
 
-      const response = await fetch('http://34.68.23.90:3001/api/users/create', {
+      const response = await fetch(`http://${process.env.VM_IP}:3001/api/users/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
