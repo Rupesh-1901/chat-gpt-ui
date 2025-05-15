@@ -86,7 +86,7 @@ export function AppItem(props) {
             const encodedIdentifier = encodeURIComponent(deleteIdentifier);
             console.log('Encoded identifier for URL:', encodedIdentifier);
             
-            const deleteUrl = `http://34.44.230.187:3001/api/personas/${encodedIdentifier}`;
+            const deleteUrl = `http://65.109.233.16:3001/api/personas/${encodedIdentifier}`;
             console.log('Delete URL:', deleteUrl);
             
             const response = await fetch(deleteUrl, {
@@ -277,7 +277,7 @@ export function Apps() {
       if (user) {
         try {
           console.log('Fetching personas for user:', user.email);
-          const response = await fetch(`http://34.44.230.187:3001/api/personas/${user.uid}/${user.email}`);
+          const response = await fetch(`http://65.109.233.16:3001/api/personas/${user.uid}/${user.email}`);
           console.log('Response status:', response.status);
           const data = await response.json();
           console.log('Data from API:', data);

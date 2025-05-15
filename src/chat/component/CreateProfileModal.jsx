@@ -123,8 +123,7 @@ export function CreateProfileModal({ visible, onClose, isPersonaOnly = false }) 
 
       console.log('Sending payload to prompt generator:', payload);
 
-      const response = await fetch("http://34.44.230.187:8000/prompt_generator", {
-      // const response = await fetch("http://localhost:8000/prompt_generator", {
+      const response = await fetch("http://65.109.233.16:8000/prompt_generator", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -186,7 +185,7 @@ export function CreateProfileModal({ visible, onClose, isPersonaOnly = false }) 
         interaction_style: values.interaction_style || "",
       };
 
-      const promptResponse = await fetch("http://34.44.230.187:8000/prompt_generator", {
+      const promptResponse = await fetch("http://65.109.233.16:8000/prompt_generator", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -225,7 +224,7 @@ export function CreateProfileModal({ visible, onClose, isPersonaOnly = false }) 
       console.log("Sending profile creation with data:", transformedValues);
 
       const response = await fetch(
-        "http://34.44.230.187:3001/api/profiles/create",
+        "http://65.109.233.16:3001/api/profiles/create",
         {
           method: "POST",
           headers: {
@@ -714,7 +713,7 @@ export function CreateProfileModal({ visible, onClose, isPersonaOnly = false }) 
                         };
 
                         const response = await fetch(
-                          "http://34.44.230.187:3001/api/profiles/create",
+                          "http://65.109.233.16:3001/api/profiles/create",
                           {
                             method: "POST",
                             headers: {

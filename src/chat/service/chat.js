@@ -1,7 +1,6 @@
 export const sendChatMessage = async (question, contextMessages, onChunk, persona) => {
   const maxRetries = 3;
-  const backendUrl = 'http://34.44.230.187:8000/generate_chat';
-  // const backendUrl = 'http://localhost:8000/generate_chat';
+  const backendUrl = 'http://65.109.233.16:8000/generate_chat';
   
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {

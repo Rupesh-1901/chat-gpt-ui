@@ -1,7 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-// const uri = process.env.MONGODB_URI || "mongodb://danora:danora@34.68.23.90:27017/danora?authSource=admin";
-const uri = process.env.MONGODB_URI || "mongodb://danora:danora@34.44.230.187:27017/danora?authSource=admin";
+const uri = process.env.MONGODB_URI || "mongodb://admin:danora123@65.109.233.16:27017/?authSource=admin";
 const dbName = process.env.DB_NAME || "danora";
 
 let client;
