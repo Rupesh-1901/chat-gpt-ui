@@ -154,7 +154,7 @@ export function Apps() {
       const user = auth.currentUser;
       if (user) {
         try {
-          const response = await fetch(`http://34.44.230.187:3001/api/personas/${user.uid}/${user.email}`);
+          const response = await fetch(`http://65.109.233.16:3001/api/personas/${user.uid}/${user.email}`);
           console.log('Response:', response);
           const data = await response.json();
           console.log('Data:', data);
